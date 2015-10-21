@@ -1,0 +1,49 @@
+<div class="header">
+  <h1>Learning to Code - Create New Pin</h1>
+  <h3>A Collection of Ruby on Rails Resources for Beginners</h3>
+</div>
+<hr/>
+<div class="form-group">
+  <% if !@errors.nil? %>
+    <div class="col-md-4 col-md-offset-4">
+      <div class="error">
+        <label><%= pluralize(@errors.count, "error") %> prohoibited this pin from being saved:</label>
+        <ul>
+          <%  @errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="pin col-md-4 col-md-offset-4">
+    <%= form_for @pin do |f| %>
+      <div class="form-group">
+      <label for="pin_title">Title</label>
+      <%= f.text_field :title, class: 'form-control'%>
+    </div>
+      <div class="form-group">
+      <label for="pin_category_id">Category</label>
+      <%= f.collection_select(:category_id, Category.all, :id, :name,{}, {:class => 'form-control'}) %>
+      </div>
+      <div class="form-group">
+      <label for="pin_url">URL</label>
+      <%= f.text_field :url, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+      <label for="pin_text">Decription</label>
+      <%= f.text_field :text, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+      <label for="pin_text">Slug</label>
+      <%= f.text_field :slug, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <label for="pin_image">Image</label>
+        <%= f.file_field :image %>
+      </div>
+      <%= button_tag "Submit" %>
+    <% end %>
+  </div>
+</div>
